@@ -3,7 +3,7 @@
 import string
 from helpers import alphabet_position, rotate_char
 
-def encrypt(text, rot):
+def rotate_string(text, rot):
     """Encrypts submitted text by rotating characters by factor of rot"""
     encrypted = []
     for char in text:
