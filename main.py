@@ -26,7 +26,9 @@ form = """
         </style>
     </head>
     <body>
-        <form method="POST">
+        <h1>Web Caesar</h1>
+        <p>A Caesar cipher encrypts a message by rotating each character 13 places. This application will allow you to set the rotation factor and encrypt a message.</p>
+        <form action="/encrypt" method="POST">
             <label for="rot">Rotate by: 
                 <input type="text" value="0"/> 
             </label>
@@ -38,8 +40,30 @@ form = """
 
 """
 
+top = """
+<!DOCTYPE html>
+<html>
+<body>
+"""
+
+bottom = """
+</body>
+</html>
+"""
+
+
 @app.route("/")
 def index():
     return form
+
+@app.route("/encrypt", methods=["POST"])
+def encrypt():
+    rot_factor = request.form['rot']
+    message = request.form['text']
+
+    secret = encrypt(message, rot_factor)
+
+    return top + "<h1>" + secret + "</h1>" + bottom
+
 
 app.run()
